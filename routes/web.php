@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('/admin')->namespace('Admin')->group(function () {
+    // All admin route will defined here
+
+    Route::group(['middleware' => 'admin'], function () {
+        // Dashboard
+    Route::get('dashboard', 'AdminController@dashboard');    
+    });
+
+    // Login
+    Route::match(['get', 'post'], '/', 'AdminController@login');
+});
