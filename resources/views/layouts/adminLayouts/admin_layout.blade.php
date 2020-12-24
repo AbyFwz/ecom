@@ -55,7 +55,9 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                @yield('content')
+                <div class="row">
+                    @yield('content')
+                </div>
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
@@ -107,5 +109,7 @@
 <script src="{{ asset('js/admin/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/admin/demo.js') }}"></script>
+<!-- Admin Script -->
+<script src="{{ asset('js/admin/admin_script.js') }}"></script>
 </body>
 </html>

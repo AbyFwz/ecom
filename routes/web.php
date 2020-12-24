@@ -24,9 +24,21 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
 
     Route::group(['middleware' => 'admin'], function () {
         // Dashboard
-    Route::get('dashboard', 'AdminController@dashboard');    
-    });
+        Route::get('dashboard', 'AdminController@dashboard');    
 
+        // Settings
+        Route::get('settings', 'AdminController@settings');
+        // Check Current Password
+        Route::post('check-current-pwd', 'AdminController@chkCurrentPassword');
+        // Update Password
+        Route::post('update-pwd', 'AdminController@updateCurrentPassword');
+        // Update Admin Details
+        Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails');
+        
+        // Logout
+        Route::get('logout', 'AdminController@logout');
+    });
+    
     // Login
     Route::match(['get', 'post'], '/', 'AdminController@login');
 });
