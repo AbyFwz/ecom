@@ -1,13 +1,13 @@
 @extends('layouts.adminLayouts.admin_layout')
 @section('header', 'Settings')
-@section('title', 'Settings')
+@section('title', 'Update Admin Details')
 @section('content')
     <!-- left column -->
     <div class="col-md-6">
       <!-- general form elements -->
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Change Password</h3>
+          <h3 class="card-title">Update admin details</h3>
         </div>
         <!-- /.card-header -->
         @if (Session::has('error_message'))
@@ -25,34 +25,42 @@
             </button>
           </div>
         @endif
+        @if ($errors->any())
+        <div class="alert alert-danger fade show" role="alert" style="margin-top: 10px">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <!-- form start -->
-        <form role="form" method="post" action="{{ url('admin/update-pwd') }}" name="updatePasswordForm" id="updatePasswordForm">
+        <form role="form" method="post" action="{{ url('admin/update-admin-details') }}" name="updateAdminDetails" id="updateAdminDetails" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group">
-              <label for="admin_name">Name</label>
-              <input name="admin_name" class="form-control" id="admin_name" value="{{ $adminDetails->name }}" placeholder="Enter Name">
-            </div>
-            <div class="form-group">
               <label for="admin_email">Email address</label>
-              <input name="admin_email" class="form-control" id="admin_email" value="{{ $adminDetails->email }}" readonly>
+              <input name="admin_email" class="form-control" id="admin_email" value="{{ Auth::guard('admin')->user()->email }}" readonly>
             </div>
             <div class="form-group">
               <label for="admin_type">User Type</label>
-              <input name="admin_type" type="text" class="form-control" id="admin_type" value="{{ $adminDetails->type }}" readonly>
+              <input name="admin_type" type="text" class="form-control" id="admin_type" value="{{ Auth::guard('admin')->user()->type }}" readonly>
             </div>
             <div class="form-group">
-              <label for="current-password">Current Password</label>
-              <input name="current_pwd" type="password" class="form-control" id="current_pwd" placeholder="Password" required>
-              <span id="chkCurrentPwd"></span>
+              <label for="admin_name">Name</label>
+              <input name="admin_name" class="form-control" id="admin_name" value="{{ Auth::guard('admin')->user()->name }}" placeholder="Enter Name">
             </div>
             <div class="form-group">
-              <label for="new-password">New Password</label>
-              <input name="new_pwd" type="password" class="form-control" id="new_pwd" placeholder="New Password" required>
+              <label for="admin_mobile">Mobile</label>
+              <input name="admin_mobile" class="form-control" id="admin_mobile" value="{{ Auth::guard('admin')->user()->mobile }}" placeholder="Enter Name">
             </div>
             <div class="form-group">
-              <label for="confirm-pwd">Confirm Passwrod</label>
-              <input name="confirm_pwd" type="password" class="form-control" id="confirm_pwd" placeholder="Confirm Password" required>
+              <label for="admin_image">Image</label>
+              <input type="file" name="admin_image" class="form-control" id="admin_image" accept="image/*">
+              @if (!empty(Auth::guard('admin')->user()->image))
+                  <a target="_blank" href="{{ url('img/admin/admin_photos/'.Auth::guard('admin')->user()->image) }}">View Image</a>
+                  <input type="hidden" name="current_admin_image" value="{{ Auth::guard('admin')->user()->image }}">
+              @endif
             </div>
           <!-- /.card-body -->
 

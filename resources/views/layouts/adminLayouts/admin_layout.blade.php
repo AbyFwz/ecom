@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin | @yield('header')</title>
+  <title>Admin | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -24,6 +24,9 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -44,7 +47,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">@yield('header')</li>
+                            <li class="breadcrumb-item active">@yield('title')</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -111,5 +114,32 @@
 <script src="{{ asset('js/admin/demo.js') }}"></script>
 <!-- Admin Script -->
 <script src="{{ asset('js/admin/admin_script.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script>
+    $(function () {
+      $('#sections').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+      $('#category').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 </body>
 </html>

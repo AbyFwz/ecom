@@ -26,6 +26,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         // Dashboard
         Route::get('dashboard', 'AdminController@dashboard');    
 
+        // Main Admin Routes Functions
         // Settings
         Route::get('settings', 'AdminController@settings');
         // Check Current Password
@@ -34,9 +35,22 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::post('update-pwd', 'AdminController@updateCurrentPassword');
         // Update Admin Details
         Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails');
-        
         // Logout
         Route::get('logout', 'AdminController@logout');
+
+        // Section Routes Functions
+        // Display Sections
+        Route::get('sections', 'SectionController@sections');
+        // Change Section Status
+        Route::post('update-section-status', 'SectionController@updateSectionStatus');
+
+        // Category Routes Functions
+        // Display Categories
+        Route::get('categories', 'CategoryController@categories');
+        // Change Category Status
+        Route::post('update-category-status', 'CategoryController@updateCategoryStatus');
+        // Add Edit Category
+        Route::match(['get', 'post'], 'add-edit-categories/{id?}', 'CategoryController@addEditCategory');
     });
     
     // Login
