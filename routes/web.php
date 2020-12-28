@@ -50,7 +50,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         // Change Category Status
         Route::post('update-category-status', 'CategoryController@updateCategoryStatus');
         // Add Edit Category
-        Route::match(['get', 'post'], 'add-edit-categories/{id?}', 'CategoryController@addEditCategory');
+        Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory');
     });
     
     // Login

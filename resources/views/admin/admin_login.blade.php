@@ -45,10 +45,10 @@
                 @endif
                 
                 @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <ul>
+                <div class="alert alert-dismissible fade show" role="alert">
+                    <ul class="list-group">
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li class="list-group-item list-group-item-danger">{{ $error }}</li>
                         @endforeach
                     </ul>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

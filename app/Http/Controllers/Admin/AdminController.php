@@ -93,8 +93,6 @@ class AdminController extends Controller
                 } else {
                     $imageName = "";
                 }
-            } else {
-                Echo "Image doesnt valid!";
             }
             
 
