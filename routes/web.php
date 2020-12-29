@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -51,8 +51,20 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::post('update-category-status', 'CategoryController@updateCategoryStatus');
         // Add Edit Category
         Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory');
+        // Append Category Level
+        Route::post('append-categories-level', 'CategoryController@appendCategoryLevel');
+        // Delete Category Image
+        Route::get('delete-category-image/{id}', 'CategoryController@deleteCategoryImage');
+        // Delete Category
+        Route::get('delete-category/{id}', 'CategoryController@deleteCategory');
     });
     
     // Login
     Route::match(['get', 'post'], '/', 'AdminController@login');
 });
+
+// Frontend Routes
+Route::namespace('Front')->group(function(){
+    // Index
+    Route::get('/','IndexController@index');
+}); 

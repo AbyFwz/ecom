@@ -4,14 +4,7 @@
 @section('content')
 <!-- SELECT2 EXAMPLE -->
 <div class="col-12">
-    @if (Session::has('error_message'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ Session::get('error_message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @elseif(Session::has('success_message'))
+    @if(Session::has('success_message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ Session::get('success_message') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -36,7 +29,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ url('admin/add-edit-category') }}" method="post" name="categoryForm" id="categoryForm" enctype="multipart/form-data">
+    <form @if(empty($categoryData['id'])) action="{{ url('admin/add-edit-category') }}" @else action="{{ url('admin/add-edit-category/'.$categoryData['id']) }}" @endif method="post" name="categoryForm" id="categoryForm" enctype="multipart/form-data">
     @csrf
         <div class="card card-default">
             <div class="card-header">
@@ -48,28 +41,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="category_name">Category Name</label>
-                            <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name">
+                            <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name" @if(!empty($categoryData['category_name'])) value="{{ $categoryData['category_name'] }}" @else value="{{ old('category_name') }}" @endif>
                         </div>
                         
                         <!-- /.form-group -->
-                        <div class="form-group">
-                            <label>Category Level</label>
-                            <select name="parent_id" id="parent_id" class="form-control" style="width: 100%;">
-                                <option value="0">Main Categories</option>
-                                @foreach ($getCategory as $cat)
-                                    @if ($cat->parent_id == 0)
-                                        <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+                        <div id="appendCategoriesLevel">
+                            @include('admin.categories.append_categories_level')
                         </div>
+
                         <div class="form-group">
                             <label for="category_discount">Category Discount</label>
-                            <input type="text" class="form-control" id="category_discount" name="category_discount">
+                            <input type="text" class="form-control" id="category_discount" name="category_discount" @if(!empty($categoryData['category_discount'])) value="{{ $categoryData['category_discount'] }}" @else value="{{ old('category_discount') }}" @endif>
                         </div>
                         <div class="form-group">
                             <label for="category_description">Category Description</label>
-                            <textarea name="description" id="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
+                            <textarea name="description" id="description" rows="3" class="form-control" placeholder="Enter description">@if(!empty($categoryData['description'])) {{ $categoryData['description'] }} @else {{ old('description') }} @endif</textarea>
                         </div>
                         <!-- /.form-group -->
                     </div>
@@ -78,8 +64,9 @@
                         <div class="form-group">
                             <label>Select Section</label>
                             <select name="section_id" id="section_id" class="form-control" style="width: 100%;">
+                                <option value="">Select</option>
                                 @foreach ($getSections as $sec)
-                                    <option value="{{ $sec->id }}">{{ $sec->name }}</option>
+                                    <option value="{{ $sec->id }}" @if(!empty($categoryData['section_id']) && $categoryData['section_id'] == $sec->id) selected @endif>{{ $sec->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -95,10 +82,16 @@
                                     <span class="input-group-text" id="">Upload</span>
                                 </div>
                             </div>
+                            @if (!empty($categoryData['category_image']))
+                                <div class="mt-2">
+                                    <img src="{{ asset('img/category/'.$categoryData['category_image']) }}" alt="Category Image" class="img-thumbnail">
+                                    <a href="{{ url('admin/delete-category-image/'.$categoryData['id']) }}" class="btn btn-primary mx-auto d-block mt-1">Delete image</a>
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="category_url">Category URL</label>
-                            <input type="text" class="form-control" id="url" name="url">
+                            <input type="text" class="form-control" id="url" name="url" @if(!empty($categoryData['url'])) value="{{ $categoryData['url'] }}" @else value="{{ old('url') }}" @endif>
                         </div>
                         <!-- /.form-group -->
                     </div>
@@ -109,18 +102,18 @@
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 <label for="meta_title">Meta Title</label>
-                                <textarea name="meta_title" id="meta_title" rows="3" class="form-control" placeholder="Enter meta title"></textarea>
+                                <textarea name="meta_title" id="meta_title" rows="3" class="form-control" placeholder="Enter meta title">@if(!empty($categoryData['meta_title'])) {{ $categoryData['meta_title'] }} @else {{ old('meta_title') }} @endif</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="meta_description">Meta Description</label>
-                                <textarea name="meta_description" id="meta_description" rows="3" class="form-control" placeholder="Enter meta description"></textarea>
+                                <textarea name="meta_description" id="meta_description" rows="3" class="form-control" placeholder="Enter meta description">@if(!empty($categoryData['meta_description'])) {{ $categoryData['meta_description'] }} @else {{ old('meta_description') }} @endif</textarea>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 <label for="meta_keywords">Meta Keyword</label>
-                                <textarea name="meta_keywords" id="meta_keywords" rows="3" class="form-control" placeholder="Enter meta description"></textarea>
+                                <textarea name="meta_keywords" id="meta_keywords" rows="3" class="form-control" placeholder="Enter meta description" >@if(!empty($categoryData['meta_keywords'])) {{ $categoryData['meta_keywords'] }} @else {{ old('meta_keywords') }} @endif</textarea>
                             </div>
                         </div>
                         <!-- /.col -->
