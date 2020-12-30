@@ -23,11 +23,11 @@
             <td>{{ $sec->id }}</td>
             <td>{{ $sec->name }}</td>
             <td>
-                @if ($sec->status == 1)
-                    <a href="javascript:void(0)" class="updateSectionStatus" id="section-{{ $sec->id }}" section_id="{{ $sec->id }}">Active</a>
-                @else
-                    <a href="javascript:void(0)" class="updateSectionStatus" id="section-{{ $sec->id }}" section_id="{{ $sec->id }}">Inactive</a>
-                @endif
+              @if ($sec->status == 1)
+                <a href="javascript:void(0)" class="updateSectionStatus" id="section-{{ $sec->id }}" section_id="{{ $sec->id }}"><i class="fas fa-toggle-on" status="Active" aria-hidden="true"></i></a>
+              @else
+                <a href="javascript:void(0)" class="updateSectionStatus" id="section-{{ $sec->id }}" section_id="{{ $sec->id }}"><i class="fas fa-toggle-off" status="Inactive" aria-hidden="true"></i></a>
+              @endif
             </td>
           </tr>
           @endforeach

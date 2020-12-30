@@ -30,6 +30,8 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+  {{-- Sweetalert2 --}}
+  <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -142,6 +144,24 @@
         "autoWidth": false,
         "responsive": true,
       });
+      $('#products').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+      $('#productsAttribute').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
     });
   </script>
   <!-- Select2 -->
@@ -153,6 +173,11 @@
           width: 'resolve'
         });
       });
+  </script>
+  {{-- Sweetalert2 --}}
+  <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+  <script>
+  
   </script>
 </body>
 </html>

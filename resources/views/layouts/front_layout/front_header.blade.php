@@ -1,8 +1,9 @@
 <?php
-use App\Section;
-$sections = print_r($sections);die;
+ use App\Section;
+ $getSection = Section::get();
 ?>
-<div id="header">
+
+<div id="header"> 
 	<div class="container">
 		<div id="welcomeLine" class="row">
 			<div class="span6">Welcome!<strong> User</strong></div>
@@ -22,54 +23,31 @@ $sections = print_r($sections);die;
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#">Stack Developers</a>
+                  <a class="brand" href="{{ url('/') }}">Localhost</a>
                   <div class="nav-collapse">
                     <ul class="nav">
-                      <li class="active"><a href="#">Home</a></li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                      <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                      @foreach($getSection as $sec)
+                        @if(count($sec['categories'])>0)
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{$sec['name'] }} <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
                             <li class="divider"></li>
-                          <li class="nav-header"><a href="#">T-Shirts</a></li>
-                          <li><a href="#">Casual T-Shirts</a></li>
-                          <li><a href="#">Formal T-Shirts</a></li>
-                          <li class="divider"></li>
-                          <li class="nav-header"><a href="#">Shirts</a></li>
-                          <li><a href="#">Casual Shirts</a></li>
-                          <li><a href="#">Formal Shirts</a></li>
-                        </ul>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li class="divider"></li>
-                          <li class="nav-header"><a href="#">Tops</a></li>
-                          <li><a href="#">Casual Tops</a></li>
-                          <li><a href="#">Formal Tops</a></li>
-                          <li class="divider"></li>
-                          <li class="nav-header"><a href="#">Dresses</a></li>
-                          <li><a href="#">Casual Dresses</a></li>
-                          <li><a href="#">Formal Dresses</a></li>
-                        </ul>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li class="divider"></li>
-                          <li class="nav-header"><a href="#">T-Shirts</a></li>
-                          <li><a href="#">Casual T-Shirts</a></li>
-                          <li><a href="#">Formal T-Shirts</a></li>
-                          <li class="divider"></li>
-                          <li class="nav-header"><a href="#">Shirts</a></li>
-                          <li><a href="#">Casual Shirts</a></li>
-                          <li><a href="#">Formal Shirts</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#">About</a></li>
+                            @foreach ($sec['categories'] as $cat)
+                              <li class="nav-header"><a href="{{ url($cat['url']) }}">{{ $cat['category_name'] }}</a></li>
+                              @foreach ($cat['subcategories'] as $subcat)
+                                <li><a href="{{ url($subcat['url']) }}">{{ $subcat['category_name'] }}</a></li>
+                              @endforeach
+                            @endforeach
+                          </ul>
+                        </li>
+                        @endif
+                      @endforeach
+                      {{-- <li><a href="#">About</a></li> --}}
                     </ul>
-                    <form class="navbar-search pull-left" action="#">
+                    {{-- <form class="navbar-search pull-left" action="#">
                       <input type="text" class="search-query span2" placeholder="Search"/>
-                    </form>
+                    </form> --}}
                     <ul class="nav pull-right">
                       <li><a href="#">Contact</a></li>
                       <li class="divider-vertical"></li>

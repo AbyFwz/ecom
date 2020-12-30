@@ -44,6 +44,16 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         // Change Section Status
         Route::post('update-section-status', 'SectionController@updateSectionStatus');
 
+        // Brand Routes Functions
+        // Display Brands
+        Route::get('brands', 'BrandController@brands');
+        // Add Edit Brands
+        Route::match(['get', 'post'], 'add-edit-brand/{id?}', 'BrandController@addEditBrand');
+        // Change Brand Status
+        Route::post('update-brand-status', 'BrandController@updateBrandStatus');
+        // Delete Brand
+        Route::get('delete-brand/{id}', 'BrandController@deleteBrand');
+        
         // Category Routes Functions
         // Display Categories
         Route::get('categories', 'CategoryController@categories');
@@ -57,6 +67,42 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::get('delete-category-image/{id}', 'CategoryController@deleteCategoryImage');
         // Delete Category
         Route::get('delete-category/{id}', 'CategoryController@deleteCategory');
+
+        // Products
+        // Display Products
+        Route::get('products', 'ProductsController@products');
+        // Change Products Status
+        Route::post('update-product-status', 'ProductsController@updateProductStatus');
+        // Add Edit Products
+        Route::match(['get', 'post'], 'add-edit-product/{id?}', 'ProductsController@addEditProduct');
+        // Delete Product Image
+        Route::get('delete-product-image/{id}', 'ProductsController@deleteProductImage');
+        // Delete Product Video
+        Route::get('delete-product-video/{id}', 'ProductsController@deleteProductVideo');
+        // Delete Product
+        Route::get('delete-product/{id}', 'ProductsController@deleteProduct');
+
+        // Attributes
+        // Add Attributes
+        Route::match(['get', 'post'], 'add-attributes/{id}', 'ProductsController@addAttributes');
+        // Edit Attributes
+        Route::post('edit-attributes/{id}', 'ProductsController@editAttributes');
+        // Change Attribute Status
+        Route::post('update-attribute-status', 'ProductsController@updateAttributeStatus');
+        // Delete Product
+        Route::get('delete-attribute/{id}', 'ProductsController@deleteAttribute');
+
+        // Images
+        // Add Images
+        Route::match(['get', 'post'], 'add-images/{id}', 'ProductsController@addImages');
+        // Change Image Status
+        Route::post('update-image-status', 'ProductsController@updateImageStatus');
+        // Delete Product Image
+        Route::get('delete-image/{id}', 'ProductsController@deleteImage');
+    
+        // Banners
+        // Display Banners
+        Route::get('banners','BannersController@banners');
     });
     
     // Login

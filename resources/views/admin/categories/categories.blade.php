@@ -51,15 +51,16 @@
             <td>{{ $cat->section->name }}</td>
             <td>{{ $cat->url }}</td>
             <td>
-                @if ($cat->status == 1)
-                    <a href="javascript:void(0)" class="updateCategoryStatus" id="category-{{ $cat->id }}" category_id="{{ $cat->id }}">Active</a>
-                @else
-                    <a href="javascript:void(0)" class="updateCategoryStatus" id="category-{{ $cat->id }}" category_id="{{ $cat->id }}">Inactive</a>
-                @endif
+              @if ($cat->status == 1)
+                <a href="javascript:void(0)" class="updateCategoryStatus" id="category-{{ $cat->id }}" category_id="{{ $cat->id }}"><i class="fas fa-toggle-on" status="Active" aria-hidden="true"></i></a>
+              @else
+                <a href="javascript:void(0)" class="updateCategoryStatus" id="category-{{ $cat->id }}" category_id="{{ $cat->id }}"><i class="fas fa-toggle-off" status="Inactive" aria-hidden="true"></i></a>
+              @endif
             </td>
             <td>
-              <a href="{{ url('admin/add-edit-category/'.$cat->id) }}">Edit</a>
-              <a href="{{ url('admin/delete-category/'.$cat->id) }}">Delete</a>
+              <a title="Edit Categories" href="{{ url('admin/add-edit-category/'.$cat->id) }}"><i class="fas fa-edit"></i></a>
+              <a title="Delete Categories" href="javascript:void(0)" class="confirmDelete" record="category" recordid="{{ $cat->id }}"><i class="fas fa-trash"></i></a>
+              {{-- href="{{ url('admin/delete-category/'.$cat->id) }}" --}}
             </td>
           </tr>
           @endforeach
