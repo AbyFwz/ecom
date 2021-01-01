@@ -53,14 +53,6 @@
           </tr>
           @endforeach
           </tbody>
-          <tfoot>
-          <tr>
-            <th>ID</th>
-            <th>brand Name</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-          </tfoot>
         </table>
       </div>
       <!-- /.card-body -->

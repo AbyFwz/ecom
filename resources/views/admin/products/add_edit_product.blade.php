@@ -38,7 +38,7 @@
             <!-- /.card-header -->
             <div class="card-body"> 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Select Category</label>
                             <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
@@ -55,7 +55,18 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>    
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Select Brands</label>
+                            <select name="brand_id" id="brand_id" class="form-control" style="width: 100%;">
+                                <option value="">Select</option>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand['id'] }}" @if(!empty($productData['brand_id']) && $productData['brand_id'] == $brand['id']) selected @endif>{{ $brand['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>   
                 </div>           
                 <div class="row">
                     <div class="col-md-6">
@@ -69,7 +80,7 @@
                         </div>
                         <div class="form-group">
                             <label for="product_discount">product Discount</label>
-                            <input type="text" class="form-control" id="product_discount" name="product_discount" @if(!empty($productData['product_discount'])) value="{{ $productData['product_discount'] }}" @elseif($productData['product_discount'] == 0) value="0" @else value="{{ old('product_discount') }}"  @endif>
+                            <input type="text" class="form-control" id="product_discount" name="product_discount" @if(!empty($productData['product_discount'])) value="{{ $productData['product_discount'] }}" @else value="{{ old('product_discount') }}"  @endif>
                         </div>
                     </div>
                     <!-- /.col -->
@@ -143,7 +154,7 @@
                             <select name="fabric" id="fabric" class="form-control" style="width: 100%;">
                                 <option value="">Select</option>
                                 @foreach ($fabricArray as $fabric)
-                                    <option value="{{ $fabric }}" @if($productData['fabric'] == $fabric) selected @endif>{{ $fabric }}</option>
+                                    <option value="{{ $fabric }}" @if(!empty($productData['fabric']) && $productData['fabric'] == $fabric) selected @endif>{{ $fabric }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -152,7 +163,7 @@
                             <select name="sleeve" id="sleeve" class="form-control" style="width: 100%;">
                                 <option value="">Select</option>
                                 @foreach ($sleeveArray as $sleeve)
-                                    <option value="{{ $sleeve }}" @if($productData['sleeve'] == $sleeve) selected @endif>{{ $sleeve }}</option>
+                                    <option value="{{ $sleeve }}" @if(!empty($productData['sleeve']) && $productData['sleeve'] == $sleeve) selected @endif>{{ $sleeve }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -161,7 +172,7 @@
                             <select name="pattern" id="pattern" class="form-control" style="width: 100%;">
                                 <option value="">Select</option>
                                 @foreach ($patternArray as $pattern)
-                                    <option value="{{ $pattern }}" @if($productData['pattern'] == $pattern) selected @endif>{{ $pattern }}</option>
+                                    <option value="{{ $pattern }}" @if(!empty($productData['pattern']) && $productData['pattern'] == $pattern) selected @endif>{{ $pattern }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -176,7 +187,7 @@
                             <select name="fit" id="fit" class="form-control" style="width: 100%;">
                                 <option value="">Select</option>
                                 @foreach ($fitArray as $fit)
-                                    <option value="{{ $fit }}" @if($productData['fit'] == $fit) selected @endif>{{ $fit }}</option>
+                                    <option value="{{ $fit }}" @if(!empty($productData['fit']) && $productData['fit'] == $fit) selected @endif>{{ $fit }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -185,7 +196,7 @@
                             <select name="occasion" id="occasion" class="form-control" style="width: 100%;">
                                 <option value="">Select</option>
                                 @foreach ($occasionArray as $occasion)
-                                    <option value="{{ $occasion }}" @if($productData['occasion'] == $occasion) selected @endif>{{ $occasion }}</option>
+                                    <option value="{{ $occasion }}" @if(!empty($productData['occasion']) && $productData['occasion'] == $occasion) selected @endif>{{ $occasion }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -193,8 +204,8 @@
                             <label for="is_featured">Is Featured Product?</label>
                             <select name="is_featured" id="is_featured" class="form-control" style="width: 100%">
                                 <option value="">Select</option>
-                                <option value="yes" @if($productData['is_featured'] == 'Yes') selected @endif>Yes</option>
-                                <option value="no" @if($productData['is_featured'] == 'No') selected @endif>No</option>
+                                <option value="yes" @if(!empty($productData['is_featured']) && $productData['is_featured'] == 'Yes') selected @endif>Yes</option>
+                                <option value="no" @if(!empty($productData['is_featured']) && $productData['is_featured'] == 'No') selected @endif>No</option>
                             </select>
                         </div>
                     </div>

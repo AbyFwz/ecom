@@ -65,17 +65,6 @@
           </tr>
           @endforeach
           </tbody>
-          <tfoot>
-          <tr>
-            <th>ID</th>
-            <th>Category</th>
-            <th>Parent Category</th>
-            <th>Section</th>
-            <th>URL</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-          </tfoot>
         </table>
       </div>
       <!-- /.card-body -->

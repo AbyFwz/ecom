@@ -154,6 +154,27 @@
         });
     });
 
+    // Change attribute status
+    $(document).on("click",".updateBannerStatus", function(){
+        var status = $(this).children("i").attr("status");
+        // var status = $(this).text();
+        var banner_id = $(this).attr("banner_id");
+        $.ajax({
+            type: 'post',
+            url: '/admin/update-banner-status',
+            data: {status:status, banner_id:banner_id},
+            success:function (resp) {
+                if (resp['status'] == 0) {
+                    $("#banner-"+banner_id).html("<i class='fas fa-toggle-off' status='Inactive' aria-hidden='true'></i>");
+                } else if(resp['status'] == 1){
+                    $("#banner-"+banner_id).html("<i class='fas fa-toggle-on' status='Active' aria-hidden='true'></i>");
+                }
+            }, error:function () {
+                alert("Error");
+            }
+        });
+    });
+
     // Append categories level
     $('#section_id').change(function () {
         var section_id = $(this).val();
@@ -191,7 +212,7 @@
     var maxField = 10;
     var addButton = $('.add_button');
     var wrapper = $('.attr-form');
-    var fieldHTML = '<div class="form-row mb-2"><div class="col-auto"><input id="size" name="size[]" type="text" class="form-control" value="" placeholder="Size" required>    </div><div class="col-auto"><input id="sku" name="sku[]" type="text" class="form-control" value="" placeholder="SKU" required>    </div><div class="col-auto"><input id="prize" name="prize[]" type="number class="form-control" value="" placeholder="Prize" required>    </div><div class="col-auto"><input id="stock" name="stock[]" type="number" class="form-control" value="" placeholder="Stock" required></div>&nbsp;<a href="javascript:void(0)" class="remove_button"><i class="fas fa-trash"></i></a></div>';
+    var fieldHTML = '<div class="form-row mb-2"><div class="col-auto"><input id="size" name="size[]" type="text" class="form-control" value="" placeholder="Size" required>    </div><div class="col-auto"><input id="sku" name="sku[]" type="text" class="form-control" value="" placeholder="SKU" required>    </div><div class="col-auto"><input id="price" name="price[]" type="number" class="form-control" value="" placeholder="Price" required>    </div><div class="col-auto"><input id="stock" name="stock[]" type="number" class="form-control" value="" placeholder="Stock" required></div>&nbsp;<a href="javascript:void(0)" class="remove_button"><i class="fas fa-trash"></i></a></div>';
     var x = 1;
 
     $(addButton).click(function () {

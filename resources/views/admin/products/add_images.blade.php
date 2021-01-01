@@ -117,10 +117,10 @@
                                 <img src="{{ asset('img/product/small/'.$img['image']) }}" alt="product Image" class="img-thumbnail">
                             </td>
                             <td>
-                                @if ($img->status == 1)
-                                    <a href="javascript:void(0)" class="updateImageStatus" id="image-{{ $img->id }}" image_id="{{ $img->id }}"><i class="fas fa-toggle-on" status="Active" aria-hidden="true"></i></a>
+                                @if ($img['status'] == 1)
+                                    <a href="javascript:void(0)" class="updateImageStatus" id="image-{{ $img['id'] }}" image_id="{{ $img['id'] }}"><i class="fas fa-toggle-on" status="Active" aria-hidden="true"></i></a>
                                 @else
-                                    <a href="javascript:void(0)" class="updateImageStatus" id="image-{{ $img->id }}" image_id="{{ $img->id }}"><i class="fas fa-toggle-off" status="Inactive" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)" class="updateImageStatus" id="image-{{ $img['id'] }}" image_id="{{ $img['id'] }}"><i class="fas fa-toggle-off" status="Inactive" aria-hidden="true"></i></a>
                                 @endif
                             </td>
                             <td>

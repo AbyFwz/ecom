@@ -12,6 +12,7 @@ class BrandController extends Controller
     public function brands()
     {
         $brands = Brand::get();
+        Session::put('page', 'brands');
         return view('admin.brands.brands')->with(compact('brands'));
     }
 

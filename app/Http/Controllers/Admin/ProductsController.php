@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Section;
+use App\Brand;
 use App\ProductsAttribute;
 use App\ProductsImage;
 use Session;
@@ -79,6 +80,9 @@ class ProductsController extends Controller
             ];
             $this->validate($request, $rules, $customMessages);
 
+            if (empty($data['product_discount'])) {
+                $data['product_discount'] = 0;
+            }
             if (empty($data['fabric'])) {
                 $data['fabric'] = "";
             }
@@ -174,6 +178,7 @@ class ProductsController extends Controller
             $categoryDetails = Category::find($data['category_id']);
             $product->section_id = $categoryDetails['section_id'];
             $product->category_id = $data['category_id'];
+            $product->brand_id = $data['brand_id'];
             $product->product_name = $data['product_name'];
             $product->product_code = $data['product_code'];
             $product->product_color = $data['product_color'];
@@ -193,7 +198,7 @@ class ProductsController extends Controller
             if(!empty($data['is_featured'])){
                 $product->is_featured = $data['is_featured'];
             }else{
-                $product->is_fetaured = "No";
+                $product->is_featured = "No";
             }
             $product->status = 1;
             $product->save();
@@ -214,7 +219,11 @@ class ProductsController extends Controller
         $categories = json_decode(json_encode($categories), true);
         // echo "<pre>"; print_r($categories); die;
 
-        return view('admin.products.add_edit_product')->with(compact('title', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray', 'categories', 'productData'));
+        // Get all brands
+        $brands = Brand::where('status', 1)->get();
+        $brands = json_decode(json_encode($brands), true);
+
+        return view('admin.products.add_edit_product')->with(compact('title', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray', 'categories', 'productData', 'brands'));
     }
 
     public function deleteProductImage($id)

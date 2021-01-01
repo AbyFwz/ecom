@@ -11,6 +11,8 @@
 |
 */
 
+use App\Category;
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -99,10 +101,15 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::post('update-image-status', 'ProductsController@updateImageStatus');
         // Delete Product Image
         Route::get('delete-image/{id}', 'ProductsController@deleteImage');
-    
-        // Banners
+
         // Display Banners
         Route::get('banners','BannersController@banners');
+        // Add Edit Banner
+        Route::match(['get', 'post'], 'add-edit-banner/{id?}', 'BannersController@addEditBanner');
+        // Change Banners Status
+        Route::post('update-banner-status', 'BannersController@updateBannerStatus');
+        // Delete Banner Image
+        Route::get('delete-banner/{id}', 'BannersController@deleteBannerImage');
     });
     
     // Login
@@ -113,4 +120,11 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
 Route::namespace('Front')->group(function(){
     // Index
     Route::get('/','IndexController@index');
+    // Listing Page
+    $catUrls = Category::select('url')->where('status', 1)->get()->pluck('url')->toArray();
+    foreach ($catUrls as $url) {
+        Route::get('/'.$url, 'ProductsController@listing');
+    }
+    // Detail Products
+    Route::get('/product/{id}', 'ProductsController@detail');
 }); 

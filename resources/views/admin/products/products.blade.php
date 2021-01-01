@@ -71,18 +71,6 @@
           </tr>
           @endforeach
           </tbody>
-          <tfoot>
-          <tr>
-            <th>ID</th>
-            <th>Product Name</th>
-            <th>Product Code</th>
-            <th>Product Color</th>
-            <th>Category</th>
-            <th>Section</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-          </tfoot>
         </table>
       </div>
       <!-- /.card-body -->

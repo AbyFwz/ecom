@@ -135,10 +135,10 @@
                                 <input class="form-control" type="number" name="stock[]" id="" value="{{ $attr['stock'] }}" required>
                             </td>
                             <td>
-                                @if ($attr->status == 1)
-                                    <a href="javascript:void(0)" class="updateAttributeStatus" id="attribute-{{ $attr->id }}" attribute_id="{{ $attr->id }}"><i class="fas fa-toggle-on" status="Active" aria-hidden="true"></i></a>
+                                @if ($attr['status'] == 1)
+                                    <a href="javascript:void(0)" class="updateAttributeStatus" id="attribute-{{ $attr['id'] }}" attribute_id="{{ $attr['id'] }}"><i class="fas fa-toggle-on" status="Active" aria-hidden="true"></i></a>
                                 @else
-                                    <a href="javascript:void(0)" class="updateAttributeStatus" id="attribute-{{ $attr->id }}" attribute_id="{{ $attr->id }}"><i class="fas fa-toggle-off" status="Inactive" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)" class="updateAttributeStatus" id="attribute-{{ $attr['id'] }}" attribute_id="{{ $attr['id'] }}"><i class="fas fa-toggle-off" status="Inactive" aria-hidden="true"></i></a>
                                 @endif
                             </td>
                             <td>
