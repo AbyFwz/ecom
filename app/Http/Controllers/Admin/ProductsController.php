@@ -456,4 +456,15 @@ class ProductsController extends Controller
         Session::flash('success_message', $message);
         return redirect()->back();
     }
+
+    public function listing($url){
+        $categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
+        if($cateagoryCount>0){
+            // echo "Category exists"; die;
+            $catDetails = Category::categoryDetails($url);
+            echo "<pre>"; print_r($catDetails); die;
+        }else{
+            abort(404);
+        }
+    }
 }
