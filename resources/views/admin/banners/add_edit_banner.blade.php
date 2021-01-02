@@ -29,7 +29,7 @@
             </ul>
         </div>
     @endif
-    <form @if(!empty($brand['id'])) @else action="{{ url('admin/add-edit-brand') }}" @endif method="post" name="brandForm" id="brandForm" enctype="multipart/form-data">
+    <form @if(!empty($banners['id'])) action="{{ url('admin/add-edit-banner'.$banners['id']) }}" @else action="{{ url('admin/add-edit-banner') }}" @endif method="post" name="bannerForm" id="bannerForm" enctype="multipart/form-data">
     @csrf
         <div class="card card-default">
             <div class="card-header">
@@ -44,25 +44,32 @@
                                 <label>Banner Image</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" accept="image/*" name="main_image">
-                                        <label class="custom-file-label" for="main_image">Choose File</label>
+                                        <input type="file" class="custom-file-input" accept="image/*" name="image">
+                                        <label class="custom-file-label" for="image">Choose File</label>
                                     </div>
                                 </div>
                                 @if (!empty($banners['image']))
                                     <div class="mt-2">
-                                        <img src="{{ asset('img/banner/small/'.$banners['image']) }}" alt="banner Image" class="img-thumbnail">
+                                        <img src="{{ asset('img/banner/'.$banners['image']) }}" alt="banner Image" class="img-thumbnail">
                                     </div>
                                 @endif
                             </div>
                             <div class="form-group">
                                 <label for="product_discount">Banner Link</label>
-                                <input type="text" class="form-control" id="link" name="link" @if(!empty($productData['product_discount'])) value="{{ $productData['product_discount'] }}" @else value="{{ old('product_discount') }}"  @endif>
+                                <input type="text" class="form-control" id="link" name="link" @if(!empty($banners['link'])) value="{{ $banners['link'] }}" @else value="{{ old('link') }}"  @endif>
                             </div>
                         </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-md-6">
-                            
+                        <div class="form-group">
+                            <label for="product_discount">Banner Title</label>
+                            <input type="text" class="form-control" id="title" name="title" @if(!empty($banners['title'])) value="{{ $banners['title'] }}" @else value="{{ old('title') }}"  @endif>
+                        </div>
+                        <div class="form-group">
+                            <label for="product_discount">Banner Alternate Text</label>
+                            <input type="text" class="form-control" id="alt" name="alt" @if(!empty($banners['alt'])) value="{{ $banners['alt'] }}" @else value="{{ old('alt') }}"  @endif>
+                        </div>  
                     </div>
                     <!-- /.col -->
                 </div>

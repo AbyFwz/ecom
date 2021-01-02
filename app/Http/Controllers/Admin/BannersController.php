@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Banner;
+use Image;
 use Session;
 
 class BannersController extends Controller
@@ -19,22 +20,60 @@ class BannersController extends Controller
 
     public function addEditBanner(Request $request, $id = null)
     {
-        if ($id = "") {
+        if ($id == "") {
             $banner = new Banner;
             $title = "Add Banner";
-            $message = "Banner add successfully";
+            $message = "Banner has been added successfully";
         } else {
             $banner = Banner::find($id);
             $title = "Edit Banner";
-            $message = "Banner upload successfully";
+            $message = "Banner has been edited successfully";
         }
+
         if($request->isMethod('post')){
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
+
+            if (empty($data['link'])) {
+                $data['link'] = "";
+            }
+            if (empty($data['title'])) {
+                $data['title'] = "";
+            }
+            if (empty($data['alt'])) {
+                $data['alt'] = "";
+            }
+
+            if ($request->hasFile('image')) {
+                $image_tmp = $request->file('image');
+                if ($image_tmp->isValid()) {
+                    // Get extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    // Generate new image name
+                    $imageName = rand(111, 99999).'.'.$extension;
+                    $imagePath = 'img/banner/'.$imageName;
+
+                    if (file_exists('img/banner/'.$data['image'])) {
+                        unlink('img/banner/'.$data['image']);
+                    }
+
+                    // Upload the image
+                    Image::make($image_tmp)->save($imagePath);
+
+                    $banner->image = $imageName;
+                }
+            }
+
             $banner->link = $data['link'];
             $banner->title = $data['title'];
             $banner->alt = $data['alt'];
+            $banner->status = 1;
+            $banner->save();
+
+            Session::Flash('success_message', $message);
+            return redirect(url('/admin/banners'));
         }
+
         return view('admin.banners.add_edit_banner')->with(compact('title','banner'));
     }
 
