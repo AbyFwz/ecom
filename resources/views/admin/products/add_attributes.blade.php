@@ -54,6 +54,9 @@
                         <div class="form-group">
                             <label for="product_code">Product Code</label>
                             <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Enter product Code" @if(!empty($productData['product_code'])) value="{{ $productData['product_code'] }}" @else value="{{ old('product_code') }}"  @endif readonly>
+                        </div><div class="form-group">
+                            <label for="product_code">Product Price</label>
+                            <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Enter product Price" @if(!empty($productData['product_price'])) value="{{ $productData['product_price'] }}" @else value="{{ old('product_price') }}"  @endif readonly>
                         </div>
                         <div class="form-group">
                             <label for="product_color">Product Color</label>

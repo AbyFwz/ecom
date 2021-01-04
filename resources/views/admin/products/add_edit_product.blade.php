@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Select Category</label>
-                            <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
+                            <select name="category_id" id="category_id" class="form-control" style="width: 100%;" required>
                                 <option value="">Select</option>
                                 @foreach ($categories as $sec)
                                     <optgroup label="{{ $sec['name'] }}">
@@ -59,7 +59,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Select Brands</label>
-                            <select name="brand_id" id="brand_id" class="form-control" style="width: 100%;">
+                            <select name="brand_id" id="brand_id" class="form-control" style="width: 100%;" required>
                                 <option value="">Select</option>
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand['id'] }}" @if(!empty($productData['brand_id']) && $productData['brand_id'] == $brand['id']) selected @endif>{{ $brand['name'] }}</option>
@@ -72,14 +72,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="product_name">Product Name</label>
-                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product Name" @if(!empty($productData['product_name'])) value="{{ $productData['product_name'] }}" @else value="{{ old('product_name') }}"  @endif>
+                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product Name" @if(!empty($productData['product_name'])) value="{{ $productData['product_name'] }}" @else value="{{ old('product_name') }}"  @endif required>
                         </div>
                         <div class="form-group">
-                            <label for="product_price">product Price</label>
-                            <input type="number" class="form-control" id="product_price" name="product_price" @if(!empty($productData['product_price'])) value="{{ $productData['product_price'] }}" @else value="{{ old('product_price') }}"  @endif>
+                            <label for="product_price">Product Price</label>
+                            <input type="number" class="form-control" id="product_price" name="product_price" @if(!empty($productData['product_price'])) value="{{ $productData['product_price'] }}" @else value="{{ old('product_price') }}"  @endif required>
                         </div>
                         <div class="form-group">
-                            <label for="product_discount">product Discount</label>
+                            <label for="product_discount">Product Discount</label>
                             <input type="text" class="form-control" id="product_discount" name="product_discount" @if(!empty($productData['product_discount'])) value="{{ $productData['product_discount'] }}" @else value="{{ old('product_discount') }}"  @endif>
                         </div>
                     </div>
@@ -87,15 +87,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="product_code">Product Code</label>
-                            <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Enter product Code" @if(!empty($productData['product_code'])) value="{{ $productData['product_code'] }}" @else value="{{ old('product_code') }}"  @endif>
+                            <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Enter product Code" @if(!empty($productData['product_code'])) value="{{ $productData['product_code'] }}" @else value="{{ old('product_code') }}"  @endif required>
                         </div>
                         <div class="form-group">
                             <label for="product_color">Product Color</label>
-                            <input type="text" class="form-control" id="product_color" name="product_color" placeholder="Enter product Color" @if(!empty($productData['product_color'])) value="{{ $productData['product_color'] }}" @else value="{{ old('product_color') }}"  @endif>
+                            <input type="text" class="form-control" id="product_color" name="product_color" placeholder="Enter product Color" @if(!empty($productData['product_color'])) value="{{ $productData['product_color'] }}" @else value="{{ old('product_color') }}"  @endif required>
                         </div>
                         <div class="form-group">
                             <label for="product_weight">Product Weight</label>
-                            <input type="text" class="form-control" id="product_weight" name="product_weight" placeholder="Enter product Weight" @if(!empty($productData['product_weight'])) value="{{ $productData['product_weight'] }}" @else value="{{ old('product_weight') }}"  @endif>
+                            <input type="text" class="form-control" id="product_weight" name="product_weight" placeholder="Enter product Weight" @if(!empty($productData['product_weight'])) value="{{ $productData['product_weight'] }}" @else value="{{ old('product_weight') }}"  @endif required>
                         </div>
                     </div>
                     <!-- /.col -->

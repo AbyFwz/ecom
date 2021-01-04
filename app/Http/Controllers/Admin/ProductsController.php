@@ -289,7 +289,7 @@ class ProductsController extends Controller
     public function addAttributes(Request $request, $id)
     {
         $title = "Products Attributes";
-        $productData = Product::select('id', 'product_name', 'product_code', 'product_color', 'main_image')->with('attributes')->find($id);
+        $productData = Product::select('id', 'product_name', 'product_code', 'product_price', 'product_color', 'main_image')->with('attributes')->find($id);
         $productData = json_decode(json_encode($productData), true);
         // echo "<pre>"; print_r($productData); die;
         if ($request->isMethod('post')){
@@ -357,7 +357,7 @@ class ProductsController extends Controller
             } else {
                 $status = 1;
             }
-            product::where('id', $data['attribute_id'])->update(['status'=>$status]);
+            ProductsAttribute::where('id', $data['attribute_id'])->update(['status'=>$status]);
             return response()->json(['status'=>$status, 'attribute_id'=>$data['attribute_id']]);
         }
     }
@@ -455,16 +455,5 @@ class ProductsController extends Controller
         $message = "Product images has been deleted successfully!";
         Session::flash('success_message', $message);
         return redirect()->back();
-    }
-
-    public function listing($url){
-        $categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
-        if($cateagoryCount>0){
-            // echo "Category exists"; die;
-            $catDetails = Category::categoryDetails($url);
-            echo "<pre>"; print_r($catDetails); die;
-        }else{
-            abort(404);
-        }
     }
 }

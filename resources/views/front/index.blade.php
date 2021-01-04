@@ -24,7 +24,7 @@
                                         </a>
                                         <div class="caption">
                                             <h5>{{ $item['product_name']}}</h5>
-                                            <h4><a class="btn" href="product_details.html">VIEW</a>
+                                            <h4><a class="btn" href="{{ url('/product/'.$item['id']) }}">VIEW</a>
                                             <span class="pull-right">Rp.{{ $item['product_price'] }}</span></h4>    
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                         {{ $product['product_code'] }} ({{ $product['product_color'] }})
                     </p>
                     
-                    <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">Rs.1000</a></h4>
+                    <h4 style="text-align:center"><a class="btn" href="{{ url('/product/'.$item['id']) }}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ url('/product/'.$item['id']) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">Rs.1000</a></h4>
                 </div>
             </div>
         </li>

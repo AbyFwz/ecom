@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin;
+use App\User;
+use App\Product;
+use App\Cart;
 use Auth;
 use Session;
 use Validator;
@@ -16,7 +19,10 @@ class AdminController extends Controller
     public function dashboard()
     {
         Session::put('page', 'dashboard');
-        return view('admin.admin_dashboard');
+        $infoUser = User::count();
+        $infoProduct = Product::count();
+        $infoCart = Cart::count();
+        return view('admin.admin_dashboard')->with(compact('infoUser', 'infoProduct', 'infoCart'));
     }
 
     public function settings(Request $request)

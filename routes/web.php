@@ -13,9 +13,9 @@
 
 use App\Category;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
@@ -125,6 +125,29 @@ Route::namespace('Front')->group(function(){
     foreach ($catUrls as $url) {
         Route::get('/'.$url, 'ProductsController@listing');
     }
+    // Route::get('/{url}', 'ProductsController@listing');
+
     // Detail Products
     Route::get('/product/{id}', 'ProductsController@detail');
+    // Get Product Attribute Prive
+    Route::post('/get-product-price', 'ProductsController@getProductPrice');
+
+    // Add to cart
+    Route::post('/add-to-cart', 'ProductsController@addToCart');
+    // Shopping cart
+    Route::get('/cart', 'ProductsController@cart');
+    // Update Quantity in Cart
+    Route::post('/update-cart-item-qty', 'ProductsController@updateCartItemQty');
+    // Delete Item from Cart
+    Route::post('/delete-cart-item', 'ProductsController@deleteCartItem');
+
+    // Login/Register User
+    // Login Register Page
+    Route::get('/login-register', 'UsersController@loginRegister');
+    // Register User
+    Route::post('/register', 'UsersController@registerUser');
+    // Login User
+    Route::post('/login', 'UsersController@loginUser');
+    // Logout User
+    Route::get('/logout', 'UsersController@logoutUser');
 }); 

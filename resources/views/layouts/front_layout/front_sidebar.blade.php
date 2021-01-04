@@ -10,9 +10,9 @@
                 <li class="subMenu"><a>{{ $sec['name'] }}</a>
                 @foreach($sec['categories'] as $cat)
                     <ul> 
-                        <li><a href="products.html"><i class="icon-chevron-right"></i><strong>{{ $cat['category_name'] }}</strong></a></li>
+                        <li><a href="{{ url('/'.$cat['url']) }}"><i class="icon-chevron-right"></i><strong>{{ $cat['category_name'] }}</strong></a></li>
                         @foreach ($cat['subcategories'] as $subcat)
-                        <li><a href="products.html"><i class="icon-chevron-right"></i>{{$subcat['category_name'] }}</a></li>
+                        <li><a href="{{ url('/'.$subcat['url']) }}"><i class="icon-chevron-right"></i>{{$subcat['category_name'] }}</a></li>
                         @endforeach
                     </ul>
                 @endforeach

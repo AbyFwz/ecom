@@ -154,7 +154,7 @@
         });
     });
 
-    // Change attribute status
+    // Change banner status
     $(document).on("click",".updateBannerStatus", function(){
         var status = $(this).children("i").attr("status");
         // var status = $(this).text();

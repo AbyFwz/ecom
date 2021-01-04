@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	
 	<!-- Front style -->
 	<link id="callCss" rel="stylesheet" href="{{ asset('css/front/front.min.css') }}" media="screen"/>
@@ -46,6 +47,15 @@
 
 <script src="{{ asset('js/front/front.js') }}"></script>
 <script src="{{ asset('js/front/jquery.lightbox-0.5.js') }}"></script>
+
+<script src="{{ asset('js/front/front_script.js') }}"></script>
+<script>
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	})
+</script>
 
 </body>
 </html>

@@ -53,8 +53,8 @@ class BannersController extends Controller
                     $imageName = rand(111, 99999).'.'.$extension;
                     $imagePath = 'img/banner/'.$imageName;
 
-                    if (file_exists('img/banner/'.$data['image'])) {
-                        unlink('img/banner/'.$data['image']);
+                    if (file_exists('img/banner/'.$banner['image'])) {
+                        unlink('img/banner/'.$banner['image']);
                     }
 
                     // Upload the image
