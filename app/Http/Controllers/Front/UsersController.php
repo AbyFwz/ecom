@@ -13,6 +13,9 @@ class UsersController extends Controller
 {
     public function loginRegister()
     {
+        if (Auth::check()) {
+            return redirect('/');
+        }
         return view('front.users.login_register');
     }
 
@@ -67,6 +70,6 @@ class UsersController extends Controller
     public function logoutUser(Request $request)
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/login-register');
     }
 }

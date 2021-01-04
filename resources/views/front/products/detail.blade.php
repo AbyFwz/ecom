@@ -34,7 +34,7 @@
                 -->
             </div>
             
-            <div class="btn-toolbar">
+            {{-- <div class="btn-toolbar">
                 <div class="btn-group">
                     <span class="btn"><i class="icon-envelope"></i></span>
                     <span class="btn" ><i class="icon-print"></i></span>
@@ -43,7 +43,7 @@
                     <span class="btn" ><i class=" icon-thumbs-up"></i></span>
                     <span class="btn" ><i class="icon-thumbs-down"></i></span>
                 </div>
-            </div>
+            </div> --}}
         </div>
     
         <div class="span6">
@@ -77,7 +77,7 @@
                                 <option value="{{ $attr['size'] }}">{{ $attr['size'] }}</option>
                             @endforeach
                         </select>
-                        <input name="quantity" type="number" class="span1" placeholder="Qty." required/>
+                        <input name="quantity" type="number" class="span1" placeholder="Qty." required min="1" value="1"/>
                         <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
                 </div>
             </form>

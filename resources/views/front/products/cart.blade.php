@@ -7,8 +7,18 @@
 		<li class="active"> SHOPPING CART</li>
     </ul>
 	<h3>  
-        SHOPPING CART [ <small>3 Item(s) </small>]
-        <a href="products.html" class="btn btn-large pull-right">
+        SHOPPING CART [ <small>
+            @if (!empty(Auth::check()))
+                {{ Cart::where('user_id', Auth::user()->id)->count() }}
+            @else 
+                @if (!empty(Cart::where('session_id', Session::get('session_id'))->count()))
+                {{ Cart::where('session_id', Session::get('session_id'))->count() }} 
+                @else
+                    0
+                @endif
+            @endif Item(s) 
+        </small>]
+        <a href="{{ url('/') }}" class="btn btn-large pull-right">
             <i class="icon-arrow-left"></i> Continue Shopping 
         </a>
     </h3>	
@@ -160,8 +170,8 @@
 			  </td>
 			  </tr>
             </table> -->		
-	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	<a href="{{ url('/') }}" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+	<a href="#" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
 	
 </div>
 @endsection

@@ -6,7 +6,7 @@ $(document).ready(function () {
         $.ajax({
             url:url,
             method:"post",
-            data:{sort:sort,url:url},
+            data:{sort:sort, url:url},
             success:function(data){
                 $('.filter_products').html(data);
             }

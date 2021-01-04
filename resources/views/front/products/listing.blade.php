@@ -13,7 +13,7 @@
     <hr class="soft"/>
     <form name="sortProducts" id="sortProducts" class="form-horizontal span6">
         <div class="control-group">
-        <input type="hidden" name="url" value="{{ $url }}">
+        <input type="hidden" name="url" id="url" value="{{ $url }}">
             <label class="control-label alignL">Sort By </label>
             <select name="sort" id="sort">
                 <option value="">Select</option>
@@ -30,7 +30,7 @@
     <div class="tab-content filter_products">
         @include('front.products.ajax_products_listing')
     </div>
-    <a href="compair.html" class="btn btn-large pull-right">Compare Product</a>
+    <a href="#" class="btn btn-large pull-right">Compare Product</a>
     <div class="pagination">
         @if(isset($_GET['sort']) && !empty($_GET['sort']))
             {{ $categoryProducts->links() }}

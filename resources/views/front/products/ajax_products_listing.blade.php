@@ -12,7 +12,7 @@
                         @endif
                     </a>
                     <div class="caption">
-                        <h5>{{ $prod['product_name'] }} {{ $prod['id'] }}</h5>
+                        <h5>{{ $prod['product_name'] }}</h5>
                         <p>
                             @if (!empty($prod['brand_id']))
                                 {{ $prod['brand']['name'] }}

@@ -122,6 +122,7 @@ Route::namespace('Front')->group(function(){
     Route::get('/','IndexController@index');
     // Listing Page
     $catUrls = Category::select('url')->where('status', 1)->get()->pluck('url')->toArray();
+    // echo "<pre>"; print_r($catUrls); die;
     foreach ($catUrls as $url) {
         Route::get('/'.$url, 'ProductsController@listing');
     }

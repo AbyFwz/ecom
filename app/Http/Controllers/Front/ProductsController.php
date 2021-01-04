@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Route;
 use App\Category;
 use App\Product;
 use App\ProductsAttribute;
@@ -14,10 +15,10 @@ use Auth;
 
 class ProductsController extends Controller
 {
-    public function listing($url, Request $request){
+    public function listing(Request $request){
         if ($request->ajax()){
             $data = $request->all();
-            echo "<pre>" ; print_r($data); die;
+            // echo "<pre>" ; print_r($data); die;
             $url = $data['url'];
             $categoryCount = Category::where(['url'=>$url, 'status'=>1])->count();
             if ($categoryCount>0) {
@@ -43,11 +44,12 @@ class ProductsController extends Controller
                 $categoryProducts = $categoryProducts->paginate(30);
 
                 // echo "<pre>"; print_r($categoryProducts); die;
-                return view('front.products.listing')->with(compact('categoryDetails', 'categoryProducts', 'url'));
+                return view('front.products.ajax_products_listing')->with(compact('categoryDetails', 'categoryProducts', 'url'));
             } else {
                 abort(404);
             }  
         } else {
+            $url = Route::getFacadeRoot()->current()->uri();
             $categoryCount = Category::where(['url'=>$url, 'status'=>1])->count();
             if ($categoryCount>0) {
                 $categoryDetails = Category::catDetails($url);
